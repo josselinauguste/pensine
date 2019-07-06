@@ -1,0 +1,18 @@
+opam-version: "2.0"
+name: "pensine"
+version: "1.0.0"
+synopsis: "Minimalist Personal Knowledge Base"
+homepage: "https://github.com/josselinauguste/pensine"
+bug-reports: "https://github.com/josselinauguste/pensine/issues"
+maintainer: "Josselin Auguste <jauguste@iblop.net>"
+authors: "Josselin Auguste <jauguste@iblop.net>"
+license: "MIT"
+
+depends: [
+  "ocaml" {>= "4.08.0"}
+  "dune" {build}
+  "core"
+  "core_kernel"
+]
+
+build: ["dune" "build" "-p" name]
