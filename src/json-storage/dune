@@ -1,0 +1,3 @@
+(library
+  (name json_storage)
+  (libraries core core_kernel.uuid yojson knowledge))

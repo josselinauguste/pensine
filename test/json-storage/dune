@@ -1,0 +1,12 @@
+(executable
+ (name test_json_storage)
+ (libraries
+  alcotest
+  json_storage
+  knowledge
+))
+
+(alias
+ (name runtest)
+ (deps test_json_storage.exe)
+ (action (run %{deps} -q --color=always)))

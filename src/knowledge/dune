@@ -1,0 +1,3 @@
+(library
+  (name knowledge)
+  (libraries core_kernel core_kernel.uuid))
