@@ -2,6 +2,8 @@
  (name test_json_storage)
  (libraries
   alcotest
+  core
+  core.uuid
   json_storage
   knowledge
 ))
