@@ -6,7 +6,7 @@ homepage: "https://github.com/josselinauguste/pensine"
 bug-reports: "https://github.com/josselinauguste/pensine/issues"
 maintainer: "Josselin Auguste <jauguste@iblop.net>"
 authors: "Josselin Auguste <jauguste@iblop.net>"
-license: "MIT"
+license: "GPLv3"
 
 depends: [
   "ocaml" {>= "4.08.0"}
