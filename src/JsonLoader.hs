@@ -26,7 +26,9 @@ import           Data.Aeson
 import           Data.ByteString.Lazy           ( ByteString )
 import           Data.UUID
 import           GHC.Generics
-import           Knowledge                      ( Thought(Thought), Attachment )
+import           Knowledge                      ( Thought(Thought)
+                                                , Attachment
+                                                )
 
 data RawThought = ParsedThought { essence :: String, parents :: [UUID] }
   deriving (Show, Generic, FromJSON)
@@ -36,10 +38,14 @@ loadPensineFromPath = undefined
 
 loadPensine :: [(UUID, ByteString)] -> Maybe [Thought]
 loadPensine jsonThoughts = fmap linkThoughts <$> thoughts
-  where thoughts = sequence $ loadThought <$> jsonThoughts
-        linkThoughts cstr = cstr [] [] []
+ where
+  thoughts = sequence $ loadThought <$> jsonThoughts
+  linkThoughts (_parentsUuid, partialThought) = partialThought [] [] []
 
-loadThought :: (UUID, ByteString) -> Maybe ([Thought] -> [Thought] -> [Attachment] -> Thought)
-loadThought (uuid, jsonThought) =
-  Thought uuid . essence <$> rawThought
-  where rawThought = decode jsonThought :: Maybe RawThought
+loadThought
+  :: (UUID, ByteString)
+  -> Maybe ([UUID], [Thought] -> [Thought] -> [Attachment] -> Thought)
+loadThought (uuid, jsonThought) = toPartialThought <$> rawThought
+ where
+  rawThought = decode jsonThought :: Maybe RawThought
+  toPartialThought t = (parents t, Thought uuid $ essence t)
